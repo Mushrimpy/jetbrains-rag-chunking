@@ -119,27 +119,6 @@ class TextSplitter(BaseChunker, ABC):
             docs.append(doc)
         return docs
 
-    # @classmethod
-    # def from_huggingface_tokenizer(cls, tokenizer: Any, **kwargs: Any) -> TextSplitter:
-    #     """Text splitter that uses HuggingFace tokenizer to count length."""
-    #     try:
-    #         from transformers import PreTrainedTokenizerBase
-
-    #         if not isinstance(tokenizer, PreTrainedTokenizerBase):
-    #             raise ValueError(
-    #                 "Tokenizer received was not an instance of PreTrainedTokenizerBase"
-    #             )
-
-    #         def _huggingface_tokenizer_length(text: str) -> int:
-    #             return len(tokenizer.encode(text))
-
-    #     except ImportError:
-    #         raise ValueError(
-    #             "Could not import transformers python package. "
-    #             "Please install it with `pip install transformers`."
-    #         )
-    #     return cls(length_function=_huggingface_tokenizer_length, **kwargs)
-
     @classmethod
     def from_tiktoken_encoder(
         cls: Type[TS],
