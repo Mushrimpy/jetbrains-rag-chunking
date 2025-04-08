@@ -3,7 +3,7 @@ from pipeline import run_evaluation
 from sentence_transformers import SentenceTransformer
 
 
-def create_embedder(model_name="sentence-transformers/all-mpnet-base-v2"):
+def create_embedder(model_name="sentence-transformers/multi-qa-mpnet-base-dot-v1"):
     model = SentenceTransformer(model_name)
 
     def embed_text(text):
