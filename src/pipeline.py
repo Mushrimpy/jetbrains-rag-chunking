@@ -1,7 +1,4 @@
-import json
-import pandas as pd
 import numpy as np
-from fixed_token_chunker import FixedTokenChunker
 from metrics import calculate_metrics
 from sklearn.metrics.pairwise import cosine_similarity
 from utils import load_corpus, load_questions
@@ -30,8 +27,8 @@ def run_evaluation(
         query_embedding = embedding_fn(query)
 
         # Retrival by cosine similarity
-        similarities = cosine_similarity(
-            chunk_embeddings, query_embedding.reshape(1, -1)
+        similarities = np.dot(chunk_embeddings, query_embedding) / (
+            np.linalg.norm(chunk_embeddings, axis=1) * np.linalg.norm(query_embedding)
         )
         top_indices = np.argsort(similarities).flatten()[-num_retrievals:]
         retrieved_chunks = [chunk_objects[i] for i in top_indices]
